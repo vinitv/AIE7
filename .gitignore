@@ -1,2 +1,4 @@
 .DS_Store
 .env
+05_Our_First_Agent_with_LangGraph/frontend/node_modules/
+node_modules/
