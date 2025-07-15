@@ -1,92 +1,169 @@
-<p align = "center" draggable=”false” ><img src="https://github.com/AI-Maker-Space/LLM-Dev-101/assets/37101144/d1343317-fa2f-41e1-8af1-1dbb18399719" 
-     width="200px"
-     height="auto"/>
-</p>
+# Unified Space Exploration Agent Deployment
 
-## <h1 align="center" id="heading">Session 5: Our First Agent with LangGraph</h1>
+This guide shows how to deploy both the Next.js frontend and FastAPI backend as a **single Cloud Run service**.
 
-| 🤓 Pre-work | 📰 Session Sheet | ⏺️ Recording     | 🖼️ Slides        | 👨‍💻 Repo         | 📝 Homework      | 📁 Feedback       |
-|:-----------------|:-----------------|:-----------------|:-----------------|:-----------------|:-----------------|:-----------------|
-| [Session 5: Pre-Work](https://www.notion.so/Session-5-Agents-21dcd547af3d801280a6eb64c638b438?source=copy_link#21dcd547af3d81f99ab1fc47bd985f58)| [Session 5: Agents](https://www.notion.so/Session-5-Agents-21dcd547af3d801280a6eb64c638b438) | [Recording!](https://us02web.zoom.us/rec/share/FdGaKx3GgN3DKK6-E7X4qiRjKFqbJXlyv6BRlXjDLwOFJAwCcGMSBHRjhwVO5jOj.9Jlld_-bkFLNJ0ll)  (.$bq?mJ7) | [Session 5 Slides](https://www.canva.com/design/DAGsm6s70T0/L0ZR8DzmJLWeGetP5DcCTg/edit?utm_content=DAGsm6s70T0&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton) | You are here! | [Session 5 Assignment: Agents](https://forms.gle/6roSZPAk2c6HDSx67) | [AIE7 Feedback 7/8](https://forms.gle/m4pdbdyBKj1CP5cQ9)
+## 🌟 Benefits of Unified Deployment
 
+- **Simplified Architecture**: One service instead of two
+- **Lower Costs**: Single Cloud Run instance
+- **No CORS Issues**: Frontend and API on same domain
+- **Easier Management**: One deployment, one URL
+- **Better Performance**: No cross-service network calls
 
-
-In today's assignment, we'll be creating an Agentic LangChain RAG Application.
-
-- 🤝 Breakout Room #1:
-  1. Install required libraries
-  2. Set Environment Variables
-  3. Creating our Tool Belt
-  4. Creating Our State
-  5. Creating and Compiling A Graph!
-  
-- 🤝 Breakout Room #2:
-  - Part 1: LangSmith Evaluator:
-    1. Creating an Evaluation Dataset
-    2. Adding Evaluators
-  - Part 2:
-    3. Adding Helpfulness Check and "Loop" Limits
-    4. LangGraph for the "Patterns" of GenAI
-
-### Advanced Build
-
-You are tasked to create an agent with 3 tools that can research a specific domain of your choice.
-
-You must deploy the resultant agent with a React (or Custom) frontend.
-
-## Ship 🚢
-
-The completed notebook!
-
-### Deliverables
-
-- A short Loom of the notebook, and a 1min. walkthrough of the application in full
-
-## Share 🚀
-
-Make a social media post about your final application!
-
-### Deliverables
-
-- Make a post on any social media platform about what you built!
-
-Here's a template to get you started:
+## 🏗️ Architecture
 
 ```
-🚀 Exciting News! 🚀
-
-I am thrilled to announce that I have just built and shipped an Agentic Retrieval Augmented Generation Application with LangChain! 🎉🤖
-
-🔍 Three Key Takeaways:
-1️⃣ 
-2️⃣ 
-3️⃣ 
-
-Let's continue pushing the boundaries of what's possible in the world of AI and question-answering. Here's to many more innovations! 🚀
-Shout out to @AIMakerspace !
-
-#LangChain #QuestionAnswering #RetrievalAugmented #Innovation #AI #TechMilestone
-
-Feel free to reach out if you're curious or would like to collaborate on similar projects! 🤝🔥
+┌─────────────────────────────────────┐
+│          Cloud Run Service          │
+├─────────────────────────────────────┤
+│  FastAPI Backend                    │
+│  ├── API endpoints (/api/*, /ask)   │
+│  ├── Health check (/health)         │
+│  └── Static file serving (/)        │
+├─────────────────────────────────────┤
+│  Next.js Frontend (Static Export)   │
+│  ├── Built to /static directory     │
+│  ├── React SPA                      │
+│  └── Served by FastAPI              │
+└─────────────────────────────────────┘
 ```
 
-## Submitting Your Homework
+## 🚀 Quick Deployment
 
-### Main Homework Assignment
+### Prerequisites
+- Google Cloud Project with billing enabled
+- gcloud CLI installed and authenticated
+- Docker (for local testing, optional)
 
-Follow these steps to prepare and submit your homework assignment:
-1. Create a branch of your `AIE7` repo to track your changes. Example command: `git checkout -b s05-assignment`
-2. Respond to the activities and questions in the `Introduction_to_LangGraph_for_Agents_Assignment_Version.ipynb` notebook:
-    + Edit the markdown cells of the activities and questions then enter your responses
-    + NOTE: Remember to create a header (example: `##### ✅ Answer:`) to help the grader find your responses
-3. Commit, and push your completed notebook to your `origin` repository. _NOTE: Do not merge it into your main branch._
-4. Make sure to include all of the following on your Homework Submission Form:
-    + The GitHub URL to the completed notebook _on your assignment branch (not main)_
-    + The URL to your Loom Video
-    + Your Three lessons learned/not yet learned
-    + The URLs to any social media posts (LinkedIn, X, Discord, etc.) ⬅️ _easy Extra Credit points!_
+### Deploy to Cloud Run
 
-### Advanced Build
-In addition to the above, include on your homework submission form the URLs to your Advanced Build's:
-+ GitHub Repo
-+ Production Deployment
+1. **Set your Google Cloud project:**
+   ```bash
+   gcloud config set project YOUR_PROJECT_ID
+   ```
+
+2. **Deploy the unified service:**
+   ```bash
+   ./deploy-unified.sh
+   ```
+
+3. **Access your application:**
+   - The script will output your service URL
+   - Visit the URL to access the frontend
+   - API endpoints are available at the same domain
+
+## 📁 File Structure
+
+```
+space-exploration-agent/
+├── Dockerfile                 # Unified Docker build
+├── cloudbuild-unified.yaml   # Cloud Build config
+├── deploy-unified.sh          # Deployment script
+├── api/                       # Backend code
+│   ├── main.py               # FastAPI app (now serves static files)
+│   ├── requirements.txt      # Python dependencies
+│   └── ...
+├── frontend/                 # Frontend code
+│   ├── next.config.js        # Next.js config (export mode)
+│   ├── package.json          # Node.js dependencies
+│   └── ...
+└── space_exploration_agent.py # Agent logic
+```
+
+## 🔧 How It Works
+
+1. **Build Process:**
+   - Next.js frontend is built to static files
+   - Python backend is set up with FastAPI
+   - Static files are copied to `/static` directory
+
+2. **Runtime:**
+   - FastAPI serves API endpoints (`/api/*`, `/ask`, `/health`)
+   - FastAPI serves static frontend files for all other routes
+   - Single port (8080) handles all traffic
+
+3. **Routing:**
+   ```
+   /health          → FastAPI health check
+   /api/test-keys   → FastAPI API endpoint
+   /ask             → FastAPI API endpoint
+   /setup           → Static frontend file
+   /                → Static frontend (index.html)
+   /*               → Static frontend files or index.html
+   ```
+
+## 🔑 API Keys Setup
+
+After deployment:
+1. Visit `YOUR_SERVICE_URL/setup`
+2. Enter your API keys:
+   - OpenAI API Key (required)
+   - Tavily API Key (for web search)
+   - NASA API Key (optional, DEMO_KEY works)
+
+## 🧪 Local Testing
+
+To test the unified build locally:
+
+```bash
+# Build the Docker image
+docker build -t space-agent-unified .
+
+# Run locally
+docker run -p 8080:8080 space-agent-unified
+```
+
+Visit `http://localhost:8080` to test the full application.
+
+## 🔄 Comparison with Two-Service Deployment
+
+| Aspect | Unified Service | Two Services |
+|--------|----------------|--------------|
+| Services | 1 Cloud Run service | 2 Cloud Run services |
+| Cost | Lower (1 instance) | Higher (2 instances) |
+| Complexity | Simpler | More complex |
+| CORS | No issues | Requires configuration |
+| Scaling | Single service scaling | Independent scaling |
+| URLs | 1 URL for everything | Separate URLs |
+
+## 🛠️ Customization
+
+### Environment Variables
+Set in Cloud Run service:
+- `NODE_ENV=production`
+- Add your own env vars as needed
+
+### Memory and CPU
+Adjust in `cloudbuild-unified.yaml`:
+```yaml
+- '--memory=2Gi'     # Increase if needed
+- '--cpu=1'          # Increase for more power
+```
+
+### Build Configuration
+Modify `Dockerfile` to:
+- Change Python or Node.js versions
+- Add additional dependencies
+- Customize build process
+
+## 🚨 Troubleshooting
+
+**Build fails:**
+- Check Docker syntax in `Dockerfile`
+- Verify all file paths are correct
+- Check Cloud Build logs
+
+**Static files not loading:**
+- Ensure `next.config.js` has `output: 'export'`
+- Check static file paths in FastAPI
+
+**API calls failing:**
+- Verify API routes in `main.py`
+- Check frontend API base URL configuration
+
+## 📚 Next Steps
+
+- Set up monitoring and logging
+- Configure custom domain
+- Add environment-specific configurations
+- Set up CI/CD pipeline with GitHub Actions 
