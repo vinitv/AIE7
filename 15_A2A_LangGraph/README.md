@@ -83,6 +83,10 @@ Build a LangGraph Graph to "use" your application.
 
 Do this by creating a Simple Agent that can make API calls to the 🤖Agent Node above through the A2A protocol. 
 
+##### ✅ Answer:
+
+**assignment_a2a_client.py**
+
 ### ❓ Question #1:
 
 What are the core components of an `AgentCard`?
