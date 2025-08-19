@@ -118,6 +118,8 @@ Think of it like a business card for AI agents - it tells other agents "who I am
 
 Why is A2A (and other such protocols) important in your own words?
 
+##### ✅ Answer:
+
 Right now, AI agents are like brilliant people who can't talk to each other. Each one speaks its own language, has its own way of doing things, and can't easily work with others.
 A2A fixes this by creating a common language. The most complex problems need multiple types of expertise. You might need one agent to research something, another to analyze data, and a third to write a report. Without standards, you'd have to manually wire all these together.
 
