@@ -100,7 +100,7 @@ async def demo():
     test_queries = [
         "What are the latest AI developments?",
         "Find papers on transformer architectures",
-        "Search for information about LangGraph"
+        "What's 2 plus 2"
     ]
     
     print("A2A Client Demo")
