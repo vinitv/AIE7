@@ -87,9 +87,49 @@ Do this by creating a Simple Agent that can make API calls to the 🤖Agent Node
 
 What are the core components of an `AgentCard`?
 
+##### ✅ Answer:
+
+An `AgentCard` typically contains these essential elements:
+
+## Basic Identity
+- **Name/ID** - Unique identifier for the agent
+- **Description** - What the agent does and its purpose
+- **Version** - For tracking updates and compatibility
+
+## Capabilities
+- **Skills/Functions** - List of what the agent can perform
+- **Input/Output specs** - Expected data formats
+- **Dependencies** - Required resources or other agents
+
+## Communication
+- **Endpoints** - How to reach the agent (URLs, protocols)
+- **Message formats** - Supported communication standards
+- **Authentication** - Security credentials or methods
+
+## Metadata
+- **Status** - Online/offline, health indicators
+- **Performance metrics** - Response times, success rates
+- **Configuration** - Runtime parameters and settings
+
+Think of it like a business card for AI agents - it tells other agents "who I am, what I do, and how to work with me." The exact structure varies between different agent protocols, but these are the common building blocks you'll see across most implementations.
+
+
 ### ❓ Question #2:
 
 Why is A2A (and other such protocols) important in your own words?
+
+Right now, AI agents are like brilliant people who can't talk to each other. Each one speaks its own language, has its own way of doing things, and can't easily work with others.
+A2A fixes this by creating a common language. The most complex problems need multiple types of expertise. You might need one agent to research something, another to analyze data, and a third to write a report. Without standards, you'd have to manually wire all these together.
+
+With A2A, agents can:
+
+- Find each other automatically
+- Figure out what each other can do
+- Work together on complex tasks
+- Hand off work seamlessly
+
+It's like going from having to manually coordinate every collaboration to having agents that can form their own project teams based on what's needed.
+The real deal is that this makes AI way more useful for complicated, real-world problems instead of just single-task demos. Plus companies can actually build on this stuff without getting locked into one vendor's ecosystem.
 
 ### 🚧 Advanced Build:
 
